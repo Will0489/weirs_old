@@ -13,11 +13,11 @@ $submit = false;
         $domain = 'weirswalkies.co.uk';
 
         $body = 'Hey there, we have received a new form submission on the website!';
-        $body .= '<br><br>';
-        $body .= 'Name: ' . $_POST['name'] . '<br>';
-        $body .= 'Email: ' . $_POST['email'] . '<br>';
-        $body .= 'Phone: ' . $_POST['phone'] . '<br>';
-        $body .= 'Days per week required (1-5)' . $_POST['days'] . '<br>';
+        $body .= '\n\n';
+        $body .= 'Name: ' . $_POST['name'] . '\n';
+        $body .= 'Email: ' . $_POST['email'] . '\n';
+        $body .= 'Phone: ' . $_POST['phone'] . '\n';
+        $body .= 'Days per week required (1-5)' . $_POST['days'] . '\n';
         $body .= 'Message: ' . $_POST['message'];
 
         try {
@@ -475,9 +475,7 @@ body {
     </ul>
 <img class="rectangle page_contact_fCCowArL3bT4UmBzq3RL6" src="../_imgstore/8/4013469338/page_contact_fCCowArL3bT4UmBzq3RL6/ML9BqXCcSh7eEsGYJGf57VYHO30.png" />
 
-<form id="form-page_contact_--fMsbnMseUUooi6GLSwCvT" action="http://www.weirswalkies.co.uk/_form/submit" method="POST" role="form" data-sm-module="form"
-      data-sm-frm-config="{&quot;validation&quot;: {&quot;fields&quot;: [&quot;input[type=text]&quot;, &quot;textarea&quot;],&quot;patterns&quot;: [&quot;length&quot;, &quot;email&quot;, &quot;alpha&quot;, &quot;alpha-numeric&quot;, &quot;numeric&quot;, &quot;required&quot;, &quot;at-least-one&quot;, &quot;exactly-one&quot;]}}"
-      class="page_contact_--fMsbnMseUUooi6GLSwCvT sm-form" novalidate>
+<form id="contact" method="POST" role="form" class="page_contact_--fMsbnMseUUooi6GLSwCvT sm-form" novalidate>
     <fieldset>
     
         <input type="hidden" name="PageID" value="4592981001" />
