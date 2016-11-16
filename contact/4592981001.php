@@ -13,11 +13,11 @@ $submit = false;
         $domain = 'weirswalkies.co.uk';
 
         $body = 'Hey there, we have received a new form submission on the website!';
-        $body .= '\n\n';
-        $body .= 'Name: ' . $_POST['name'] . '\n';
-        $body .= 'Email: ' . $_POST['email'] . '\n';
-        $body .= 'Phone: ' . $_POST['phone'] . '\n';
-        $body .= 'Days per week required (1-5)' . $_POST['days'] . '\n';
+        $body .= '<br><br>';
+        $body .= 'Name: ' . $_POST['name'] . '<br>';
+        $body .= 'Email: ' . $_POST['email'] . '<br>';
+        $body .= 'Phone: ' . $_POST['phone'] . '<br>';
+        $body .= 'Days per week required (1-5): ' . $_POST['days'] . '<br>';
         $body .= 'Message: ' . $_POST['message'];
 
         try {
@@ -28,6 +28,7 @@ $submit = false;
                     'to' => "'William' <williamblommaert@gmail.com>",
                     'subject' => 'New form submission!',
                     'text' => $body,
+                    'html' => $body
                 ));
         } catch (Exception $e) {
             $submit = false;
@@ -476,6 +477,12 @@ body {
 <img class="rectangle page_contact_fCCowArL3bT4UmBzq3RL6" src="../_imgstore/8/4013469338/page_contact_fCCowArL3bT4UmBzq3RL6/ML9BqXCcSh7eEsGYJGf57VYHO30.png" />
 
 <form id="contact" method="POST" role="form" class="page_contact_--fMsbnMseUUooi6GLSwCvT sm-form" novalidate>
+    <?php if($submit): ?>
+        <div class="sfm-message" style="color: white; padding-top: 20px;">
+      Your message has been sent.<br>Thanks!<br><br>
+            <a href="javascript:document.location.reload(true);">Send a new message</a>
+        </div>
+    <?php else: ?>
     <fieldset>
     
         <input type="hidden" name="PageID" value="4592981001" />
@@ -567,12 +574,7 @@ body {
     </div>
 </div>
     </fieldset>
-    <?php if($submit): ?>
-        <div class="sfm-message">
-			Your message has been sent.<br>Thanks!<br><br>
-            <a href="javascript:document.location.reload(true);">Send a new message</a>
-        </div>
-    <?php endif ?>
+  <?php endif ?>
     <script type="text/template">
         <div class="sfm-message">
             There has been an error, sorry!<br>Your message has not been sent.<br><br>
