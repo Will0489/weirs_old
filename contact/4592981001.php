@@ -1,3 +1,43 @@
+<?php 
+
+require 'vendor/autoload.php';
+use Mailgun\Mailgun;
+
+$submit = false;
+
+    if(!empty($_POST['name'])) {
+        $submit = true;
+
+        $client = new \Http\Adapter\Guzzle6\Client();
+        $mailgun = new Mailgun('key-926e9bfdce63c30c5e9dc39e2ff60632', $client);
+        $domain = 'weirswalkies.co.uk';
+
+        $body = 'Hey there, we have received a new form submission on the website!';
+        $body .= '<br><br>';
+        $body .= 'Name: ' . $_POST['name'] . '<br>';
+        $body .= 'Email: ' . $_POST['email'] . '<br>';
+        $body .= 'Phone: ' . $_POST['phone'] . '<br>';
+        $body .= 'Days per week required (1-5)' . $_POST['days'] . '<br>';
+        $body .= 'Message: ' . $_POST['message'];
+
+        try {
+            $email_result = $mailgun->sendMessage("$domain",
+                array(
+                    'from' => "'No-reply' <no-reply@weirswalkies.co.uk>",
+                    //'to' => "'Nina' <preserveprotect@yahoo.co.uk>",
+                    'to' => "'William' <williamblommaert@gmail.com>",
+                    'subject' => 'New form submission!',
+                    'text' => $body,
+                ));
+        } catch (Exception $e) {
+            $submit = false;
+            $error = $e->getMessage();
+        }
+    } else {
+        $submit = false;
+    }
+?>
+
 <!doctype html>
 <!--[if lt IE 7]>      <html class="lt-ie9 lt-ie8 lt-ie7" lang="en"> <![endif]-->
 <!--[if IE 7]>         <html class="lt-ie9 lt-ie8" lang="en"> <![endif]-->
@@ -430,7 +470,7 @@ body {
         <a href="../gallery/4592981000.html" class="menuItemDesign"><span>GALLERY</span></a>
         </li>
     <li class="menuItem selected">
-        <a href="4592981001.html" class="menuItemDesign"><span>CONTACT</span></a>
+        <a href="4592981001.php" class="menuItemDesign"><span>CONTACT</span></a>
         </li>
     </ul>
 <img class="rectangle page_contact_fCCowArL3bT4UmBzq3RL6" src="../_imgstore/8/4013469338/page_contact_fCCowArL3bT4UmBzq3RL6/ML9BqXCcSh7eEsGYJGf57VYHO30.png" />
@@ -453,7 +493,7 @@ body {
     </div>
     <div class="smf-field FormTextInput1419288797Div">
         
-        <input id="FormTextInput1419288797" class="FormTextInput1419288797" type="text" name="Name" placeholder=""
+        <input id="FormTextInput1419288797" class="FormTextInput1419288797" type="text" name="name" placeholder=""
                data-sm-frm-el="field" data-sm-validator="alphanumeric, " maxlength="100">
         <div data-sm-tooltip="Required field." class="error-tt"></div>
     </div>
@@ -468,7 +508,7 @@ body {
     </div>
     <div class="smf-field FormTextInput201337930Div">
         
-        <input id="FormTextInput201337930" class="FormTextInput201337930" type="email" name="Email" placeholder=""
+        <input id="FormTextInput201337930" class="FormTextInput201337930" type="email" name="email" placeholder=""
                data-sm-frm-el="field" data-sm-validator="email, " maxlength="255">
         <div data-sm-tooltip="Required field." class="error-tt"></div>
     </div>
@@ -483,7 +523,7 @@ body {
     </div>
     <div class="smf-field FormTextInput2107805955Div">
         
-        <input id="FormTextInput2107805955" class="FormTextInput2107805955" type="text" name="Text field 1" placeholder=""
+        <input id="FormTextInput2107805955" class="FormTextInput2107805955" type="text" name="phone" placeholder=""
                data-sm-frm-el="field" data-sm-validator="alphanumeric, " maxlength="100">
         <div data-sm-tooltip="Required field." class="error-tt"></div>
     </div>
@@ -498,7 +538,7 @@ body {
     </div>
     <div class="smf-field FormTextInput334350744Div">
         
-        <input id="FormTextInput334350744" class="FormTextInput334350744" type="text" name="Text field 3" placeholder=""
+        <input id="FormTextInput334350744" class="FormTextInput334350744" type="text" name="days" placeholder=""
                data-sm-frm-el="field" data-sm-validator="alphanumeric, " maxlength="100">
         <div data-sm-tooltip="Required field." class="error-tt"></div>
     </div>
@@ -513,7 +553,7 @@ body {
     </div>
     <div class="smf-field FormTextArea708201477Div">
         
-        <textarea id="FormTextArea708201477" class="FormTextArea708201477" name="Message" data-sm-frm-el="field"
+        <textarea id="FormTextArea708201477" class="FormTextArea708201477" name="message" data-sm-frm-el="field"
                   data-sm-validator="" cols="30" rows="10"></textarea>
         <div data-sm-tooltip="Required field." class="error-tt"></div>
     </div>
@@ -525,16 +565,16 @@ body {
 
 <div class="smf-group smf-buttons">
     <div class="smf-field FormSubmitButton445781986Div">
-        <input id="FormSubmitButton445781986" class="FormSubmitButton445781986" type="submit" data-text-action="Sending..." name="Submit" value="Submit">
+        <input class="FormSubmitButton445781986" type="submit" data-text-action="Submit" name="Submit" value="Submit">
     </div>
 </div>
     </fieldset>
-    <script type="text/template">
+    <?php if($submit): ?>
         <div class="sfm-message">
 			Your message has been sent.<br>Thanks!<br><br>
             <a href="javascript:document.location.reload(true);">Send a new message</a>
         </div>
-    </script>
+    <?php endif ?>
     <script type="text/template">
         <div class="sfm-message">
             There has been an error, sorry!<br>Your message has not been sent.<br><br>
