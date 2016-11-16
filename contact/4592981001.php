@@ -592,9 +592,9 @@ body {
 </div>
 
 
-        <script>
+<!--        <script>
 $(document).ready(function () { SM6.Login.init('', ''); })
 </script>
 <script src="http://www.weirswalkies.co.uk/_app/5158805/sm6/fancybox/jquery.fancybox.pack.js?v=2.1.5"></script>
-<script src="http://www.weirswalkies.co.uk/_app/5158805/sm6/fancybox/jquery.fancybox-init.js"></script></body>
+<script src="http://www.weirswalkies.co.uk/_app/5158805/sm6/fancybox/jquery.fancybox-init.js"></script>--></body>
 </html>
