@@ -24,8 +24,8 @@ $submit = false;
             $email_result = $mailgun->sendMessage("$domain",
                 array(
                     'from' => "'No-reply' <no-reply@weirswalkies.co.uk>",
-                    //'to' => "'Nina' <preserveprotect@yahoo.co.uk>",
-                    'to' => "'William' <williamblommaert@gmail.com>",
+                    'to' => "'Nina' <preserveprotect@yahoo.co.uk>",
+                    'cc' => "'William' <williamblommaert@gmail.com>",
                     'subject' => 'New form submission!',
                     'text' => $body,
                     'html' => $body
@@ -480,7 +480,7 @@ body {
     <?php if($submit): ?>
         <div class="sfm-message" style="color: white; padding-top: 20px;">
       Your message has been sent.<br>Thanks!<br><br>
-            <a href="javascript:document.location.reload(true);">Send a new message</a>
+            <a href="4592981001.php">Send a new message</a>
         </div>
     <?php else: ?>
     <fieldset>
